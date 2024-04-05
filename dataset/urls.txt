@@ -1,0 +1,4 @@
+https://huggingface.co/datasets/SaiedAlshahrani/Arabic_Wikipedia_20230101_bots?row=3
+https://huggingface.co/datasets/arabic_billion_words
+https://huggingface.co/datasets/dot-ammar/AR-dotless-medium
+https://huggingface.co/datasets/dot-ammar/AR-dotless-mediumPlus
