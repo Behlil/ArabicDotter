@@ -1,3 +1,5 @@
+import re
+
 def transform_characters(word):
     transformed_word = []
     for i, char in enumerate(word):
@@ -47,31 +49,28 @@ def transform_text(text):
         transformed_text.append(transformed_word)
     return ' '.join(transformed_text)
 
-def arabic_diacritics_remover(text):
-    """
-    Convert Arabic text with diacritics (dots) to dotless text.
-    
-    Args:
-    text (str): Arabic text with diacritics.
-    
-    Returns:
-    str: Dotless Arabic text.
-    """
-    # Define dictionary mapping diacritics to empty string
-    diacritics_map = {
-        'َ': '',  # Fatha
-        'ُ': '',  # Damma
-        'ِ': '',  # Kasra
-        'ً': '',  # Tanwin Fath
-        'ٌ': '',  # Tanwin Damm
-        'ٍ': '',  # Tanwin Kasr
-        'ّ': '',  # Shadda
-        'ْ': '',  # Sukun
-        'ٰ': '',  # Dagger Alef
-    }
-    
-    # Remove diacritics from the text
-    for diacritic, replacement in diacritics_map.items():
-        text = text.replace(diacritic, replacement)
-    
-    return text
+
+
+def clean_text(text):
+    # Arabic special characters
+    special_characters = [
+        u'\u064b', # FATHATAN
+        u'\u064c', # DAMMATAN
+        u'\u064d', # KASRATAN
+        u'\u064e', # FATHA
+        u'\u064f', # DAMMA
+        u'\u0650', # KASRA
+        u'\u0651', # SHADDA
+        u'\u0652', # SUKUN
+    ]
+
+    transformed_text = transform_text(text)
+
+    # Create a pattern to match special characters
+    pattern = '|'.join(special_characters)
+
+    # Use re.sub to replace special characters with an empty string
+    cleaned_text = re.sub(pattern, '', transform_text(text))
+
+    return cleaned_text
+
